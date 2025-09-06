@@ -1,0 +1,7 @@
+- name: Install tap items
+  ansible.builtin.include_tasks: tap.yml
+  loop: "{{ brew_tap }}"
+
+- name: Install brew items
+  ansible.builtin.include_tasks: brew.yml
+  loop: "{{ brew_install }}"

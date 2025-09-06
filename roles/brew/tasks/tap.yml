@@ -1,0 +1,5 @@
+- name: "Configuring {{ item }} as tap"
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  tags: ['brew']

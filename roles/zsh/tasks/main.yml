@@ -1,0 +1,17 @@
+- name: Clone repo (check if exists)
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  register: oh_my_zsh_stat
+
+- name: Clone repo
+  ansible.builtin.git:
+    repo: "https://github.com/robbyrussell/oh-my-zsh.git"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  when: not oh_my_zsh_stat.stat.exists
+
+- name: Copy default ZSH config for user {{ ansible_env.USER }}
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: '{{ ansible_env.HOME }}/.zshrc'
+    owner: '{{ ansible_env.USER }}'
+  when: not oh_my_zsh_stat.stat.exists

@@ -1,0 +1,19 @@
+git_repositories:
+  # MarcosMorelli
+  - repo: 'git@github.com:MarcosMorelli/smart-poker.git'
+    dest: '~/Git/marcosmorelli/smart-poker'
+  - repo: 'git@github.com:MarcosMorelli/react-fe.git'
+    dest: '~/Git/marcosmorelli/react-fe'
+  - repo: 'git@github.com:MorelliTec/node-be.git'
+    dest: '~/Git/marcosmorelli/node-be'
+  - repo: 'git@github.com:MorelliTec/terraform-infra.git'
+    dest: '~/Git/marcosmorelli/terraform-infra'
+  # ZARV
+  - repo: 'git@github.com:zarvhq/infra-applications.git'
+    dest: '~/Git/zarv/infra-applications'
+  - repo: 'git@github.com:zarvhq/developers.git'
+    dest: '~/Git/zarv/developers'
+  - repo: 'git@github.com:zarvhq/zarv-id.git'
+    dest: '~/Git/zarv/zarv-id'
+  - repo: 'git@github.com:zarvhq/ultron-v3.git'
+    dest: '~/Git/zarv/ultron-v3'

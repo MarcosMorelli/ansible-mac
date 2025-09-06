@@ -1,0 +1,4 @@
+- name: Install {{ item.name }}
+  community.general.mas:
+    id: "{{ item.id }}"
+    state: present

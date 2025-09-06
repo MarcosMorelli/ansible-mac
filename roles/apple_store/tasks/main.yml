@@ -1,0 +1,3 @@
+- name: Install {{ item.name }} from AppStore
+  ansible.builtin.include_tasks: install.yml
+  loop: "{{ apple_store_apps }}"

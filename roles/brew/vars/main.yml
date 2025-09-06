@@ -1,0 +1,16 @@
+brew_tap:
+  - hashicorp/tap
+
+brew_install:
+  - alfred
+  - cursor
+  - docker-desktop
+  - go
+  - google-chrome
+  - mas
+  - nvm
+  - pnpm
+  - postman
+  - rectangle
+  - slack
+  - hashicorp/tap/terraform

@@ -1,0 +1,149 @@
+- name: "General: Set timezone to America/Sao_Paulo (current value)"
+  become: true
+  ansible.builtin.command:
+    cmd: systemsetup -gettimezone
+  register: general_timezone
+  changed_when: false
+  ignore_errors: true
+  no_log: true
+
+- name: "General: Set timezone to America/Sao_Paulo"
+  become: true
+  ansible.builtin.command:
+    cmd: systemsetup -settimezone "America/Sao_Paulo" > /dev/null
+  when: "'America/Sao_Paulo' not in general_timezone.stdout"
+
+- name: "General: Always show scroll bars"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowScrollBars
+    type: string
+    value: Always
+
+- name: "General: Disable the Are you sure you want to open this application?"
+  osx_defaults:
+    domain: com.apple.LaunchServices
+    key: LSQuarantine
+    type: bool
+    value: false
+
+- name: "Dock: Remove show recents"
+  osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+  notify: Restart Dock
+
+- name: "Dock: Set left position"
+  osx_defaults:
+    domain: com.apple.dock
+    key: orientation
+    type: string
+    value: left
+  notify: Restart Dock
+
+- name: "Dock: Set auto hide"
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+  notify: Restart Dock
+
+- name: "Dock: Set the icon size of items to 36 pixels"
+  osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    type: int
+    value: 36
+  notify: Restart Dock
+
+- name: "Finder: Adds quit option"
+  osx_defaults:
+    domain: com.apple.Finder
+    key: QuitMenuItem
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: "Finder: Show all extensions"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: "Finder: Show hidden files"
+  osx_defaults:
+    domain: com.apple.Finder
+    key: AppleShowAllFiles
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: "Finder: Show hidden files"
+  osx_defaults:
+    domain: com.apple.Finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
+    value: false
+  notify: Restart Finder
+
+- name: "Finder: Show status bar"
+  osx_defaults:
+    domain: com.apple.Finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: "Finder: Show path bar"
+  osx_defaults:
+    domain: com.apple.Finder
+    key: ShowPathbar
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: "Trackpad: Disable natural scroll direction"
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: com.apple.swipescrolldirection
+    type: bool
+    value: false
+
+- name: "Trackpad: Enable tap to click for this user and for the login screen"
+  osx_defaults:
+    domain: "{{ item.domain|default(omit) }}"
+    host: "{{ item.host|default(omit) }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  with_items:
+    - host: currentHost
+      domain: NSGlobalDomain
+      key: com.apple.mouse.tapBehavior
+      type: int
+      value: 1
+    - domain: NSGlobalDomain
+      key: com.apple.mouse.tapBehavior
+      type: int
+      value: 1
+
+- name: "Keyboard: Blazing fast repeat rate"
+  osx_defaults:
+    domain: "{{ item.domain|default(omit) }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  with_items:
+    - domain: NSGlobalDomain
+      key: KeyRepeat
+      type: int
+      value: 1
+    - domain: NSGlobalDomain
+      key: InitialKeyRepeat
+      type: int
+      value: 8

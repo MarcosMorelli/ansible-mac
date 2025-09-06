@@ -1,0 +1,5 @@
+- name: "Installing {{ item }}"
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  tags: ['brew']

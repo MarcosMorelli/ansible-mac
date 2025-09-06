@@ -1,0 +1,11 @@
+- name: Git - Create directories
+  ansible.builtin.file:
+    path: "{{ item.dest }}"
+    state: directory
+  loop: "{{ git_repositories }}"
+
+- name: Git - Clone repositories
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  loop: "{{ git_repositories }}"
