@@ -9,3 +9,10 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
   loop: "{{ git_repositories }}"
+
+- name: Git - Copy envs
+  ansible.builtin.copy:
+    dest: "{{ item.dest }}"
+    content: |
+      {{ lookup('ansible.builtin.unvault', 'secrets/env/{{ item.env }}') }}
+  loop: "{{ git_envs }}"
