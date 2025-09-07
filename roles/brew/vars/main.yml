@@ -13,4 +13,5 @@ brew_install:
   - postman
   - rectangle
   - slack
+  - whatsapp
   - hashicorp/tap/terraform
