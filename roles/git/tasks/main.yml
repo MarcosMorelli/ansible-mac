@@ -14,5 +14,5 @@
   ansible.builtin.copy:
     dest: "{{ item.dest }}"
     content: |
-      {{ lookup('ansible.builtin.unvault', 'secrets/env/{{ item.env }}') }}
+      {{ lookup('ansible.builtin.unvault', 'secrets/envs/{{ item.env }}') }}
   loop: "{{ git_envs }}"

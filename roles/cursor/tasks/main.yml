@@ -1,5 +1,12 @@
-- name: Install Cursor extensions
+- name: Cursor - List installed extensions
   ansible.builtin.shell:
     cmd: |
-      code --install-extension {{ item }}
+      cursor --list-extensions
+  register: cursor_extensions_list
+
+- name: Cursor - Install extensions
+  ansible.builtin.shell:
+    cmd: |
+      cursor --install-extension {{ item }}
   loop: "{{ cursor_extensions }}"
+  when: item not in cursor_extensions_list.stdout_lines

@@ -16,3 +16,4 @@
     - role: zsh
     - role: secrets
     - role: git
+    - role: cursor

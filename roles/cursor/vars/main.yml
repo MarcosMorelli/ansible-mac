@@ -6,4 +6,4 @@ cursor_extensions:
   - mechatroner.rainbow-csv
   - mongodb.mongodb-vscode
   - tomoki1207.pdf
-  - Vue.volar
+  - vue.volar
