@@ -1,0 +1,9 @@
+cursor_extensions:
+  - bradlc.vscode-tailwindcss
+  - eamodio.gitlens
+  - esbenp.prettier-vscode
+  - golang.go
+  - mechatroner.rainbow-csv
+  - mongodb.mongodb-vscode
+  - tomoki1207.pdf
+  - Vue.volar

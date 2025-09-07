@@ -1,0 +1,5 @@
+- name: Install Cursor extensions
+  ansible.builtin.shell:
+    cmd: |
+      code --install-extension {{ item }}
+  loop: "{{ cursor_extensions }}"

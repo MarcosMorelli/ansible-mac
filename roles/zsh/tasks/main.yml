@@ -12,6 +12,6 @@
 - name: Copy default ZSH config for user {{ ansible_env.USER }}
   ansible.builtin.template:
     src: zshrc.j2
-    dest: '{{ ansible_env.HOME }}/.zshrc'
-    owner: '{{ ansible_env.USER }}'
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    owner: "{{ ansible_env.USER }}"
   when: not oh_my_zsh_stat.stat.exists
