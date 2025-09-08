@@ -1,5 +1,7 @@
 git_repositories:
   # MarcosMorelli
+  - repo: "git@github.com:MarcosMorelli/ansible-mac.git"
+    dest: "~/Git/marcosmorelli/ansible-mac"
   - repo: "git@github.com:MarcosMorelli/smart-poker.git"
     dest: "~/Git/marcosmorelli/smart-poker"
   - repo: "git@github.com:MarcosMorelli/react-fe.git"

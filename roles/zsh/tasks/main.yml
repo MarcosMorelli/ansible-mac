@@ -14,3 +14,11 @@
     src: zshrc.j2
     dest: "{{ ansible_env.HOME }}/.zshrc"
     owner: "{{ ansible_env.USER }}"
+
+- name: Create keys file
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.keys"
+    content: |
+      {{ lookup('ansible.builtin.unvault', 'secrets/keys') }}
+    mode: "0644"
+    owner: "{{ ansible_env.USER }}"

@@ -9,7 +9,7 @@ fi
 
 which -s brew
 if [[ $? != 0 ]] ; then
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "Brew Installed"
 fi
