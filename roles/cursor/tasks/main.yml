@@ -10,3 +10,9 @@
       cursor --install-extension {{ item }}
   loop: "{{ cursor_extensions }}"
   when: item not in cursor_extensions_list.stdout_lines
+
+- name: Cursor - Config file
+  ansible.builtin.template:
+    src: settings.json.j2
+    dest: /Users/{{ ansible_env.USER }}/Library/Application Support/Code/User/settings.json
+    owner: "{{ ansible_env.USER }}"

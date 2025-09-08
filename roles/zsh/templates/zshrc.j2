@@ -136,3 +136,14 @@ alias ll='ls -lhA --group-directories-first'
 # Terraform autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# Keys for infra project
+source ~/.keys
+
+export TF_VAR_AWS_S3_ACCESS_KEY=$AWS_S3_ACCESS_KEY
+export TF_VAR_AWS_S3_SECRET=$AWS_S3_SECRET
+export TF_VAR_CLOUDFLARE_TOKEN=$CLOUDFLARE_TOKEN
+export TF_VAR_DIGITALOCEAN_TOKEN=$DIGITALOCEAN_TOKEN
+export TF_VAR_HCP_CLIENT_ID=$TF_VAR_HCP_CLIENT_ID
+export TF_VAR_HCP_CLIENT_SECRET=$HCP_CLIENT_SECRET
+export TF_VAR_SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY
