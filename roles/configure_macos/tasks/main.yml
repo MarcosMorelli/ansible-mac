@@ -114,9 +114,9 @@
     type: bool
     value: false
 
-- name: "Trackpad: Enable tap to click for this user and for the login screen"
+- name: "Trackpad: Enable tap to click"
   osx_defaults:
-    domain: "{{ item.domain|default(omit) }}"
+    domain: "{{ item.domain }}"
     host: "{{ item.host|default(omit) }}"
     key: "{{ item.key }}"
     type: "{{ item.type }}"
@@ -129,6 +129,14 @@
       value: 1
     - domain: NSGlobalDomain
       key: com.apple.mouse.tapBehavior
+      type: int
+      value: 1
+    - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+      key: Clicking
+      type: int
+      value: 1
+    - domain: com.apple.AppleMultitouchTrackpad
+      key: Clicking
       type: int
       value: 1
 
