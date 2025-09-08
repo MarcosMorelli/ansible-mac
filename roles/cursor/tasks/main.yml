@@ -14,5 +14,5 @@
 - name: Cursor - Config file
   ansible.builtin.template:
     src: settings.json.j2
-    dest: /Users/{{ ansible_env.USER }}/Library/Application Support/Code/User/settings.json
+    dest: /Users/{{ ansible_env.USER }}/Library/Application Support/Cursor/User/settings.json
     owner: "{{ ansible_env.USER }}"

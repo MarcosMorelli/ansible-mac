@@ -14,4 +14,3 @@
     src: zshrc.j2
     dest: "{{ ansible_env.HOME }}/.zshrc"
     owner: "{{ ansible_env.USER }}"
-  when: not oh_my_zsh_stat.stat.exists
