@@ -2,20 +2,20 @@
   community.general.git_config:
     scope: global
     name: user.name
-    value: '{{ git.name }}'
+    value: "{{ git.name }}"
 
 - name: Git - email address
   community.general.git_config:
     scope: global
     name: user.email
-    value: '{{ git.email }}'
+    value: "{{ git.email }}"
 
 - name: Git - override default branch to match with GitHub defaults
   community.general.git_config:
     scope: global
     name: init.defaultBranch
     value: main
-    
+
 - name: Git - Create directories
   ansible.builtin.file:
     path: "{{ item.dest }}"
@@ -27,6 +27,7 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
   loop: "{{ git_repositories }}"
+  ignore_errors: yes
 
 - name: Git - Copy envs
   ansible.builtin.copy:
