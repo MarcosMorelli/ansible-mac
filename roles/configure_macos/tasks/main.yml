@@ -13,22 +13,29 @@
     cmd: systemsetup -settimezone "America/Sao_Paulo" > /dev/null
   when: "'America/Sao_Paulo' not in general_timezone.stdout"
 
+- name: "Disable hot corner bottom right"
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: wvous-br-corner
+    type: int
+    value: 0
+
 - name: "General: Always show scroll bars"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleShowScrollBars
     type: string
     value: Always
 
 - name: "General: Disable the Are you sure you want to open this application?"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.LaunchServices
     key: LSQuarantine
     type: bool
     value: false
 
 - name: "Dock: Remove show recents"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.dock
     key: show-recents
     type: bool
@@ -36,7 +43,7 @@
   notify: Restart Dock
 
 - name: "Dock: Set left position"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.dock
     key: orientation
     type: string
@@ -44,7 +51,7 @@
   notify: Restart Dock
 
 - name: "Dock: Set auto hide"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.dock
     key: autohide
     type: bool
@@ -52,7 +59,7 @@
   notify: Restart Dock
 
 - name: "Dock: Set the icon size of items to 36 pixels"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.dock
     key: tilesize
     type: int
@@ -60,7 +67,7 @@
   notify: Restart Dock
 
 - name: "Finder: Adds quit option"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.Finder
     key: QuitMenuItem
     type: bool
@@ -68,7 +75,7 @@
   notify: Restart Finder
 
 - name: "Finder: Show all extensions"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleShowAllExtensions
     type: bool
@@ -76,7 +83,7 @@
   notify: Restart Finder
 
 - name: "Finder: Show hidden files"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.Finder
     key: AppleShowAllFiles
     type: bool
@@ -84,7 +91,7 @@
   notify: Restart Finder
 
 - name: "Finder: Show hidden files"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.Finder
     key: FXEnableExtensionChangeWarning
     type: bool
@@ -92,7 +99,7 @@
   notify: Restart Finder
 
 - name: "Finder: Show status bar"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.Finder
     key: ShowStatusBar
     type: bool
@@ -100,7 +107,7 @@
   notify: Restart Finder
 
 - name: "Finder: Show path bar"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.Finder
     key: ShowPathbar
     type: bool
@@ -108,14 +115,14 @@
   notify: Restart Finder
 
 - name: "Trackpad: Disable natural scroll direction"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: com.apple.swipescrolldirection
     type: bool
     value: false
 
 - name: "Trackpad: Enable tap to click"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: "{{ item.domain }}"
     host: "{{ item.host|default(omit) }}"
     key: "{{ item.key }}"
@@ -141,7 +148,7 @@
       value: 1
 
 - name: "Keyboard: Blazing fast repeat rate"
-  osx_defaults:
+  community.general.osx_defaults:
     domain: "{{ item.domain|default(omit) }}"
     key: "{{ item.key }}"
     type: "{{ item.type }}"
