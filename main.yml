@@ -4,6 +4,11 @@
   vars_files:
     - default.config.yml
 
+  vars_prompt:
+    - name: become_pass
+      prompt: Sudo password?
+      private: true
+
   environment:
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
 

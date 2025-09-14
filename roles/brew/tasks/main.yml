@@ -5,3 +5,7 @@
 - name: Install brew items
   ansible.builtin.include_tasks: brew.yml
   loop: "{{ brew_install }}"
+
+- name: Install cask items
+  ansible.builtin.include_tasks: cask.yml
+  loop: "{{ brew_cask }}"

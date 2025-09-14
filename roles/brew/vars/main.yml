@@ -4,7 +4,6 @@ brew_tap:
 brew_install:
   - alfred
   - cursor
-  - docker-desktop
   - dockutil
   - go
   - google-chrome
@@ -15,3 +14,6 @@ brew_install:
   - postman
   - rectangle
   - hashicorp/tap/terraform
+
+brew_cask:
+  - docker-desktop
