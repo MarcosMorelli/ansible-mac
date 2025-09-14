@@ -8,8 +8,8 @@
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
 
   roles:
-    - role: apple_store
     - role: brew
+    - role: apple_store
     - role: zsh
     - role: ssh
     - role: git

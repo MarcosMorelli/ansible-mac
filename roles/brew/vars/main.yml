@@ -5,6 +5,7 @@ brew_install:
   - alfred
   - cursor
   - docker-desktop
+  - dockutil
   - go
   - google-chrome
   - mas

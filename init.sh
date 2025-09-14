@@ -39,7 +39,7 @@ else
 fi
 
 if [ -f ./vault.pass ]; then
-    ansible-playbook main.yml --ask-become-pass --vault-password-file ./vault.pass
+    ansible-playbook main.yml -K --ask-become-pass --vault-password-file ./vault.pass
 else
-    ansible-playbook main.yml --ask-become-pass --ask-vault-pass
+    ansible-playbook main.yml -K --ask-become-pass --ask-vault-pass
 fi
