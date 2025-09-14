@@ -16,3 +16,4 @@
     - role: configure_macos
     - role: dock
     - role: cursor
+    - role: node
