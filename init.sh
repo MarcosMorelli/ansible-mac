@@ -34,12 +34,14 @@ fi
 which -s ansible
 if [[ $? != 0 ]] ; then
   pipx install --include-deps ansible
+  # Ensure pipx bin directory is in PATH for current session
+  export PATH="$HOME/.local/bin:$PATH"
 else
   echo "Ansible Installed"
 fi
 
 if [ -f ./vault.pass ]; then
-    ansible-playbook main.yml -K --ask-become-pass --vault-password-file ./vault.pass
+    ansible-playbook main.yml --ask-become-pass --vault-password-file ./vault.pass
 else
-    ansible-playbook main.yml -K --ask-become-pass --ask-vault-pass
-fi
+    ansible-playbook main.yml --ask-become-pass --ask-vault-pass
+fi 
