@@ -1,3 +1,9 @@
+- name: "Check if application {{ item.name }} exists at path {{ item.path }}"
+  ansible.builtin.stat:
+    path: "{{ item.path }}"
+  register: app_exists
+  tags: ["dock"]
+
 - name: "See if Dock item {{ item.name | default(item) }} exists."
   ansible.builtin.command: "dockutil --find '{{ item.name }}'"
   register: dockitem_exists
@@ -5,9 +11,17 @@
     "No such file or directory" in dockitem_exists.stdout
     or "command not found" in dockitem_exists.stdout
   changed_when: false
-  tags: ['dock']
+  tags: ["dock"]
 
 - name: Ensure Dock item {{ item.name | default(item) }} exists.
   ansible.builtin.command: "dockutil --add '{{ item.path }}'"
-  when: dockitem_exists.rc >0
-  tags: ['dock']
+  when:
+    - app_exists.stat.exists
+    - dockitem_exists.rc > 0
+  tags: ["dock"]
+
+- name: "Skip adding {{ item.name }} - application not found at {{ item.path }}"
+  ansible.builtin.debug:
+    msg: "Skipping {{ item.name }} - application not found at {{ item.path }}"
+  when: not app_exists.stat.exists
+  tags: ["dock"]

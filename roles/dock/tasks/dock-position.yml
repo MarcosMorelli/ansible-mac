@@ -1,4 +1,3 @@
----
 - name: "Check the current Dock position of {{ item.name | default(item) }}."
   ansible.builtin.command:
     cmd: dockutil --find '{{ item.name | default(item) }}'
@@ -6,11 +5,24 @@
   failed_when: '"command not found" in dock_item_position.stdout'
   changed_when: false
 
+- name: Debug dock item position output
+  ansible.builtin.debug:
+    msg: "Dock item position output: {{ dock_item_position.stdout }}"
+
 - name: Get current dock item position from output.
   set_fact:
-    current_position: "{{ dock_item_position | regex_replace('^.*slot (.*) in.*$', '\\1') }}"
+    current_position: "{{ dock_item_position.stdout | regex_replace('^.*slot (.*) in.*$', '\\1') }}"
+  when: dock_item_position.rc == 0 and "'slot' in dock_item_position.stdout"
+
+- name: Debug current position
+  ansible.builtin.debug:
+    msg: "Current position: {{ current_position | default('not found') }}, Target position: {{ item.pos }}"
 
 - name: Move dock item to the correct position.
   ansible.builtin.command:
     cmd: dockutil --move '{{ item.name | default(item) }}' --position '{{ item.pos }}'
-  when: current_position|int != item.pos|int
+  when:
+    - dock_item_position.rc == 0
+    - "'slot' in dock_item_position.stdout"
+    - current_position is defined
+    - current_position|int != item.pos|int
