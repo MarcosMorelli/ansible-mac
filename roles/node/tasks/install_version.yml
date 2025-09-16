@@ -1,10 +1,12 @@
 - name: "Check node version: {{ node_version }}"
   shell: source $(brew --prefix nvm)/nvm.sh && nvm ls {{node_version}}
   register: node_v_result
-  changed_when: "node_version|string not in node_v_result.stdout"
   ignore_errors: true
+  changed_when: false
 
-- set_fact: version_installed="{{ node_v_result is success }}"
+- name: "Check if node version is installed"
+  set_fact:
+    version_installed: "{{ node_v_result.rc == 0 and node_version|string in node_v_result.stdout }}"
 
 - name: "Installing node version: {{ node_version }}"
   shell: source $(brew --prefix nvm)/nvm.sh && nvm install {{node_version}}

@@ -12,7 +12,7 @@
 - name: Get current dock item position from output.
   set_fact:
     current_position: "{{ dock_item_position.stdout | regex_replace('^.*slot (.*) in.*$', '\\1') }}"
-  when: dock_item_position.rc == 0 and "'slot' in dock_item_position.stdout"
+  when: dock_item_position.rc == 0 and dock_item_position.stdout is search('slot')
 
 - name: Debug current position
   ansible.builtin.debug:
@@ -23,6 +23,6 @@
     cmd: dockutil --move '{{ item.name | default(item) }}' --position '{{ item.pos }}'
   when:
     - dock_item_position.rc == 0
-    - "'slot' in dock_item_position.stdout"
+    - dock_item_position.stdout is search('slot')
     - current_position is defined
     - current_position|int != item.pos|int
