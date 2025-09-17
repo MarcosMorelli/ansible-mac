@@ -162,3 +162,16 @@
       key: InitialKeyRepeat
       type: int
       value: 8
+
+- name: "Keyboard: Check spotlight shortcut"
+  ansible.builtin.command:
+    cmd: |
+      defaults read com.apple.symbolichotkeys AppleSymbolicHotKeys | grep -A1 " 64 = "
+  register: spotlight_shortcut
+  changed_when: false
+
+- name: "Keyboard: Disable spotlight shortcut"
+  ansible.builtin.command:
+    cmd: |
+      defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict>'
+  when: spotlight_shortcut.stdout == ""
