@@ -7,6 +7,7 @@ brew_install:
   - dockutil
   - go
   - google-chrome
+  - hiddenbar
   - mas
   - mkcert
   - nvm

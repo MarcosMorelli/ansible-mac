@@ -10,6 +10,7 @@ APPS_LIST=(
     "Postman"
     "Slack"
     "WhatsApp"
+    "Hidden Bar"
 )
 
 # Function to display usage
