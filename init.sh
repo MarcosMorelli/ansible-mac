@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-if xpath=$( xcode-select --print-path ) &&
-  test -d "${xpath}" && test -x "${xpath}" ; then
-  echo "Xcode Installed"
-else
-  xcode-select --install
-fi
-
 which -s brew
 if [[ $? != 0 ]] ; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

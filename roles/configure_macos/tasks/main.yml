@@ -164,9 +164,10 @@
       value: 8
 
 - name: "Keyboard: Check spotlight shortcut"
-  ansible.builtin.command:
+  ansible.builtin.shell:
     cmd: |
-      defaults read com.apple.symbolichotkeys AppleSymbolicHotKeys | grep -A1 " 64 = "
+      defaults read com.apple.symbolichotkeys AppleSymbolicHotKeys | grep -A1 " 64 = " | grep "enabled = 0"
+  ignore_errors: true
   register: spotlight_shortcut
   changed_when: false
 
@@ -174,4 +175,4 @@
   ansible.builtin.command:
     cmd: |
       defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict>'
-  when: spotlight_shortcut.stdout != "" and "enabled" in spotlight_shortcut.stdout and "true" in spotlight_shortcut.stdout
+  when: spotlight_shortcut.rc == 1
