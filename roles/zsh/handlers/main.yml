@@ -1,0 +1,3 @@
+- name: Reload zshrc
+  ansible.builtin.shell:
+    cmd: source ~/.zshrc

@@ -14,6 +14,7 @@
     src: zshrc.j2
     dest: "{{ ansible_env.HOME }}/.zshrc"
     owner: "{{ ansible_env.USER }}"
+  notify: Reload zshrc
 
 - name: Create keys file
   ansible.builtin.copy:

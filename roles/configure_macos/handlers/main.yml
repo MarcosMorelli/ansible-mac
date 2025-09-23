@@ -1,6 +1,5 @@
----
 - name: Restart Finder
-  shell: killall Finder
+  ansible.builtin.shell: killall Finder
 
 - name: Restart Dock
-  shell: killall Dock
+  ansible.builtin.shell: killall Dock
