@@ -13,7 +13,7 @@
     cmd: systemsetup -settimezone "America/Sao_Paulo" > /dev/null
   when: "'America/Sao_Paulo' not in general_timezone.stdout"
 
-- name: "Disable hot corner bottom right"
+- name: "General: Disable hot corner bottom right"
   community.general.osx_defaults:
     domain: com.apple.dock
     key: wvous-br-corner
@@ -33,6 +33,24 @@
     key: LSQuarantine
     type: bool
     value: false
+
+- name: "Desktop: Config hide items"
+  community.general.osx_defaults:
+    domain: com.apple.WindowManager
+    key: "{{ item.key }}"
+    type: int
+    value: "{{ item.value }}"
+  with_items:
+    - key: EnableStandardClickToShowDesktop
+      value: 0
+    - key: HideDesktop
+      value: 1
+    - key: StageManagerHideWidgets
+      value: 1
+    - key: StandardHideDesktopIcons
+      value: 1
+    - key: StandardHideWidgets
+      value: 1
 
 - name: "Dock: Remove show recents"
   community.general.osx_defaults:
