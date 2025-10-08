@@ -132,6 +132,14 @@
     value: 1
   notify: Restart Finder
 
+- name: "Finder: Default list view"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: "Nlsv"
+  notify: Restart Finder
+
 - name: "Trackpad: Disable natural scroll direction"
   community.general.osx_defaults:
     domain: NSGlobalDomain
@@ -181,7 +189,7 @@
       type: int
       value: 8
 
-- name: "Keyboard: Check spotlight shortcut"
+- name: "Spotlight: Check shortcut"
   ansible.builtin.shell:
     cmd: |
       defaults read com.apple.symbolichotkeys AppleSymbolicHotKeys | grep -A1 " 64 = " | grep "enabled = 0"
@@ -189,8 +197,16 @@
   register: spotlight_shortcut
   changed_when: false
 
-- name: "Keyboard: Disable spotlight shortcut"
+- name: "Spotlight: Disable shortcut"
   ansible.builtin.command:
     cmd: |
       defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict>'
   when: spotlight_shortcut.rc == 1
+
+- name: "Spotlight: Remove menubar icon"
+  community.general.osx_defaults:
+    domain: com.apple.spotlight
+    key: "NSStatusItem Visible Item-0"
+    type: int
+    value: 1
+  absent: true
