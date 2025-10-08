@@ -13,19 +13,19 @@
     cmd: systemsetup -settimezone "America/Sao_Paulo" > /dev/null
   when: "'America/Sao_Paulo' not in general_timezone.stdout"
 
-- name: "General: Disable hot corner bottom right"
-  community.general.osx_defaults:
-    domain: com.apple.dock
-    key: wvous-br-corner
-    type: int
-    value: 0
-
 - name: "General: Always show scroll bars"
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleShowScrollBars
     type: string
     value: Always
+
+- name: "General: User dark theme"
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleInterfaceStyle
+    type: string
+    value: Dark
 
 - name: "General: Disable the Are you sure you want to open this application?"
   community.general.osx_defaults:
@@ -51,6 +51,14 @@
       value: 1
     - key: StandardHideWidgets
       value: 1
+
+- name: "Dock: Disable hot corner bottom right"
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: wvous-br-corner
+    type: int
+    value: 0
+  notify: Restart Dock
 
 - name: "Dock: Remove show recents"
   community.general.osx_defaults:
@@ -84,14 +92,6 @@
     value: 36
   notify: Restart Dock
 
-- name: "Finder: Adds quit option"
-  community.general.osx_defaults:
-    domain: com.apple.Finder
-    key: QuitMenuItem
-    type: bool
-    value: true
-  notify: Restart Finder
-
 - name: "Finder: Show all extensions"
   community.general.osx_defaults:
     domain: NSGlobalDomain
@@ -102,34 +102,34 @@
 
 - name: "Finder: Show hidden files"
   community.general.osx_defaults:
-    domain: com.apple.Finder
+    domain: com.apple.finder
     key: AppleShowAllFiles
     type: bool
     value: true
   notify: Restart Finder
 
-- name: "Finder: Show hidden files"
+- name: "Finder: Show sidebar bar"
   community.general.osx_defaults:
-    domain: com.apple.Finder
-    key: FXEnableExtensionChangeWarning
-    type: bool
-    value: false
+    domain: com.apple.finder
+    key: ShowSidebar
+    type: int
+    value: 1
   notify: Restart Finder
 
 - name: "Finder: Show status bar"
   community.general.osx_defaults:
-    domain: com.apple.Finder
+    domain: com.apple.finder
     key: ShowStatusBar
-    type: bool
-    value: true
+    type: int
+    value: 1
   notify: Restart Finder
 
 - name: "Finder: Show path bar"
   community.general.osx_defaults:
-    domain: com.apple.Finder
+    domain: com.apple.finder
     key: ShowPathbar
-    type: bool
-    value: true
+    type: int
+    value: 1
   notify: Restart Finder
 
 - name: "Trackpad: Disable natural scroll direction"
