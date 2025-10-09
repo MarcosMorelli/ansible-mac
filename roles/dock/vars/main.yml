@@ -1,16 +1,18 @@
 dockitems_remove:
   - App Store
+  - Apps
   - Calendar
   - Contacts
   - Downloads
   - FaceTime
-  - Freeform
-  - Launchpad
+  - Games
+  - Iphone Mirroring
   - Mail
   - Maps
   - Messages
   - Music
   - Notes
+  - Phone
   - Photos
   - Reminders
   - Safari
