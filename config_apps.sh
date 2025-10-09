@@ -3,6 +3,7 @@
 # Define the list of apps to open (in order)
 APPS_LIST=(
     "Bitwarden"
+    "Google Chrome"
     "Alfred 5"
     "Rectangle"
     "Cursor"
