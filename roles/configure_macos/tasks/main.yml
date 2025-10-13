@@ -68,12 +68,12 @@
     value: false
   notify: Restart Dock
 
-- name: "Dock: Set left position"
+- name: "Dock: Set right position"
   community.general.osx_defaults:
     domain: com.apple.dock
     key: orientation
     type: string
-    value: left
+    value: right
   notify: Restart Dock
 
 - name: "Dock: Set auto hide"
