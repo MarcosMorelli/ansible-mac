@@ -8,11 +8,12 @@
   ansible.builtin.include_tasks: ssh.yml
   loop: "{{ ssh_keys }}"
 
-- name: SSH - Create config file
+- name: SSH - Create config files
   ansible.builtin.template:
-    src: config.j2
-    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    src: "{{ item.template }}"
+    dest: "{{ ansible_env.HOME }}/.ssh/{{ item.dest }}"
     owner: "{{ ansible_env.USER }}"
+  loop: "{{ ssh_configs }}"
 
 - name: SSH - Known hosts
   ansible.builtin.copy:

@@ -1,0 +1,8 @@
+CONFIG=config.morelli
+
+PWD=$(pwd)
+if [[ $PWD == /Users/morelli/Git/ccc* ]]; then
+  CONFIG=config.ccc
+fi
+
+cp ~/.ssh/$CONFIG ~/.ssh/config
