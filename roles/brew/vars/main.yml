@@ -19,3 +19,4 @@ brew_install:
 brew_cask:
   - docker-desktop
   - microsoft-teams
+  - notion

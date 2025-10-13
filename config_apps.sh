@@ -12,6 +12,8 @@ APPS_LIST=(
     "Slack"
     "WhatsApp"
     "Hidden Bar"
+    "Microsoft Teams"
+    "Notion"
 )
 
 # Function to display usage
