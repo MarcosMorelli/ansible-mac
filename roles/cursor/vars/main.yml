@@ -1,5 +1,7 @@
 cursor_extensions:
   - bradlc.vscode-tailwindcss
+  - cweijan.dbclient-jdbc
+  - cweijan.vscode-mysql-client2
   - eamodio.gitlens
   - esbenp.prettier-vscode
   - golang.go
