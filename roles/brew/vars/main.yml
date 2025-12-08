@@ -15,6 +15,7 @@ brew_install:
   - postman
   - rectangle
   - hashicorp/tap/terraform
+  - zoom
 
 brew_cask:
   - docker-desktop
