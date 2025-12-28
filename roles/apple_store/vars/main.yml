@@ -1,9 +1,11 @@
 apple_store_apps:
-  - name: Bitwarden
+  - name: "Bitwarden"
     id: 1352778147
-  - name: Omnissa Horizon Client
+  - name: "Microsoft Outlook"
+    id: 985367838
+  - name: "Omnissa Horizon Client"
     id: 6737089391
-  - name: Slack
+  - name: "Slack"
     id: 803453959
-  - name: WhatsApp
+  - name: "WhatsApp"
     id: 310633997
