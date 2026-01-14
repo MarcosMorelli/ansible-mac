@@ -1,5 +1,14 @@
+- name: Check if {{ item }} is already installed
+  ansible.builtin.shell:
+    cmd: brew list | grep -q "{{ item }}"
+  register: brew_tap_check
+  changed_when: false
+  failed_when: false
+  tags: ["brew"]
+
 - name: "Configuring {{ item }} as tap"
   community.general.homebrew_tap:
     name: "{{ item }}"
     state: present
-  tags: ['brew']
+  when: not brew_tap_check.rc == 0
+  tags: ["brew"]

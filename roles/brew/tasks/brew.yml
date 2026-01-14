@@ -1,5 +1,14 @@
+- name: Check if {{ item }} is already installed
+  ansible.builtin.shell:
+    cmd: brew list | grep -q "{{ item }}"
+  register: brew_formula_check
+  changed_when: false
+  failed_when: false
+  tags: ["brew"]
+
 - name: "Installing {{ item }}"
   community.general.homebrew:
     name: "{{ item }}"
     state: present
+  when: not brew_formula_check.rc == 0
   tags: ["brew"]
