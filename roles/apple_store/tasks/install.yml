@@ -2,3 +2,4 @@
   community.general.mas:
     id: "{{ item.id }}"
     state: present
+  become: true

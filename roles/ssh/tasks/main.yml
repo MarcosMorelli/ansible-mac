@@ -11,14 +11,14 @@
 - name: SSH - Create config files
   ansible.builtin.template:
     src: "{{ item.template }}"
-    dest: "{{ ansible_env.HOME }}/.ssh/{{ item.dest }}"
-    owner: "{{ ansible_env.USER }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.ssh/{{ item.dest }}"
+    owner: "{{ ansible_facts['env']['USER'] }}"
   loop: "{{ ssh_configs }}"
 
 - name: SSH - Known hosts
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.ssh/known_hosts"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.ssh/known_hosts"
     content: |
       {{ lookup('ansible.builtin.unvault', 'secrets/ssh/known_hosts') }}
     mode: "0644"
-    owner: "{{ ansible_env.USER }}"
+    owner: "{{ ansible_facts['env']['USER'] }}"

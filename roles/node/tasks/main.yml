@@ -1,6 +1,6 @@
 - name: Creates nvm home directory
   file:
-    path: "{{ ansible_env.HOME }}/.nvm"
+    path: "{{ ansible_facts['env']['HOME'] }}/.nvm"
     state: directory
 
 - include_tasks: install_version.yml

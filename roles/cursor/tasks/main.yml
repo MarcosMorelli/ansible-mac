@@ -17,6 +17,6 @@
 - name: Cursor - Config file
   ansible.builtin.template:
     src: settings.json.j2
-    dest: /Users/{{ ansible_env.USER }}/Library/Application Support/Cursor/User/settings.json
-    owner: "{{ ansible_env.USER }}"
+    dest: /Users/{{ ansible_facts['env']['USER'] }}/Library/Application Support/Cursor/User/settings.json
+    owner: "{{ ansible_facts['env']['USER'] }}"
   tags: ["cursor"]

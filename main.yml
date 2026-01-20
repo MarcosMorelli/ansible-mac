@@ -9,8 +9,7 @@
       prompt: Sudo password?
       private: true
 
-  environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  gather_facts: true
 
   roles:
     - role: brew

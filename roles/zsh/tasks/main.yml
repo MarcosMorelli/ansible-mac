@@ -1,43 +1,43 @@
 - name: Clone repo (check if exists)
   ansible.builtin.stat:
-    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    path: "{{ ansible_facts['env']['HOME'] }}/.oh-my-zsh"
   register: oh_my_zsh_stat
 
 - name: Clone repo
   ansible.builtin.git:
     repo: "https://github.com/robbyrussell/oh-my-zsh.git"
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.oh-my-zsh"
   when: not oh_my_zsh_stat.stat.exists
 
-- name: Copy default ZSH config for user {{ ansible_env.USER }}
+- name: Copy default ZSH config for user {{ ansible_facts['env']['USER'] }}
   ansible.builtin.template:
     src: zshrc.j2
-    dest: "{{ ansible_env.HOME }}/.zshrc"
-    owner: "{{ ansible_env.USER }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.zshrc"
+    owner: "{{ ansible_facts['env']['USER'] }}"
   notify: Reload zshrc
 
 - name: Check if git.sh exists
   ansible.builtin.stat:
-    path: "{{ ansible_env.HOME }}/git.sh"
+    path: "{{ ansible_facts['env']['HOME'] }}/git.sh"
   register: git_sh_stat
 
 - name: Copy script git.sh
   ansible.builtin.template:
     src: git.j2
-    dest: "{{ ansible_env.HOME }}/git.sh"
-    owner: "{{ ansible_env.USER }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/git.sh"
+    owner: "{{ ansible_facts['env']['USER'] }}"
   when: not git_sh_stat.stat.exists
 
 - name: Make script git.sh executable
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/git.sh"
+    path: "{{ ansible_facts['env']['HOME'] }}/git.sh"
     mode: "0755"
   when: not git_sh_stat.stat.exists
 
 - name: Create keys file
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.keys"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.keys"
     content: |
       {{ lookup('ansible.builtin.unvault', 'secrets/keys') }}
     mode: "0644"
-    owner: "{{ ansible_env.USER }}"
+    owner: "{{ ansible_facts['env']['USER'] }}"

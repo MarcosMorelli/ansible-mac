@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="{{ ansible_env.HOME }}/.oh-my-zsh"
+export ZSH="{{ ansible_facts['env']['HOME'] }}/.oh-my-zsh"
 
 # Created by `pipx` on 2025-08-08 02:04:58
 export PATH="$PATH:/Users/morelli/.local/bin"

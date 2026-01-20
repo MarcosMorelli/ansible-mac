@@ -3,8 +3,6 @@ apple_store_apps:
     id: 1352778147
   - name: "Microsoft Outlook"
     id: 985367838
-  - name: "Omnissa Horizon Client"
-    id: 6737089391
   - name: "Slack"
     id: 803453959
   - name: "WhatsApp"
