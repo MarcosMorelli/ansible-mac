@@ -1,0 +1,21 @@
+- name: Git - Configure ssh
+  ansible.builtin.copy:
+    src: "{{ ansible_facts['env']['HOME'] }}/.ssh/{{ item.config }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.ssh/config"
+
+- name: Git - Create directory for repositories
+  ansible.builtin.file:
+    path: "{{ repo.dest }}"
+    state: directory
+  loop: "{{ item.repos }}"
+  loop_control:
+    loop_var: repo
+
+- name: Git - Clone repositories
+  ansible.builtin.git:
+    repo: "{{ repo.url }}"
+    dest: "{{ repo.dest }}"
+  loop: "{{ item.repos }}"
+  loop_control:
+    loop_var: repo
+  ignore_errors: yes

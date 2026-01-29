@@ -21,16 +21,16 @@
     path: "{{ ansible_facts['env']['HOME'] }}/git.sh"
   register: git_sh_stat
 
-- name: Copy script git.sh
+- name: Copy script switch_config.sh
   ansible.builtin.template:
-    src: git.j2
-    dest: "{{ ansible_facts['env']['HOME'] }}/git.sh"
+    src: switch_config.j2
+    dest: "{{ ansible_facts['env']['HOME'] }}/switch_config.sh"
     owner: "{{ ansible_facts['env']['USER'] }}"
   when: not git_sh_stat.stat.exists
 
-- name: Make script git.sh executable
+- name: Make script switch_config.sh executable
   ansible.builtin.file:
-    path: "{{ ansible_facts['env']['HOME'] }}/git.sh"
+    path: "{{ ansible_facts['env']['HOME'] }}/switch_config.sh"
     mode: "0755"
   when: not git_sh_stat.stat.exists
 

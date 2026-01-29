@@ -7,17 +7,26 @@ brew_install:
   - dockutil
   - go
   - google-chrome
+  - google-cloud-sdk
+  - hashicorp/tap/terraform
+  - helm
   - hiddenbar
+  - java11
+  - kube-forwarder
+  - kubectl
   - mas
+  - minikube
   - mkcert
   - nvm
   - pnpm
   - postman
   - rectangle
-  - hashicorp/tap/terraform
+  - studio-3t
+  - yarn
   - zoom
 
 brew_cask:
+  - corretto
   - docker-desktop
   - microsoft-teams
   - notion

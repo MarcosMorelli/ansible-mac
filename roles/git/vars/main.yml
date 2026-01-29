@@ -1,35 +1,44 @@
 git_repositories:
-  # MarcosMorelli
-  - repo: "git@github.com:MarcosMorelli/ansible-mac.git"
-    dest: "~/Git/marcosmorelli/ansible-mac"
-  - repo: "git@github.com:MarcosMorelli/smart-poker.git"
-    dest: "~/Git/marcosmorelli/smart-poker"
-  - repo: "git@github.com:MarcosMorelli/react-fe.git"
-    dest: "~/Git/marcosmorelli/react-fe"
-  - repo: "git@github.com:MorelliTec/node-be.git"
-    dest: "~/Git/marcosmorelli/node-be"
-  - repo: "git@github.com:MorelliTec/terraform-infra.git"
-    dest: "~/Git/marcosmorelli/terraform-infra"
-  # ZARV
-  - repo: "git@github.com:zarvhq/infra-applications.git"
-    dest: "~/Git/zarv/infra-applications"
-  - repo: "git@github.com:zarvhq/developers.git"
-    dest: "~/Git/zarv/developers"
-  - repo: "git@github.com:zarvhq/zarv-users.git"
-    dest: "~/Git/zarv/zarv-users"
-  - repo: "git@github.com:zarvhq/zarv-id.git"
-    dest: "~/Git/zarv/zarv-id"
-  - repo: "git@github.com:zarvhq/ultron-v3.git"
-    dest: "~/Git/zarv/ultron-v3"
+  - config: config.digibee
+    repos:
+      - url: git@gitlab.com:digibee-product/platform-governance/auth-management.git
+        dest: "~/Git/digibee/auth-management"
+      - url: git@gitlab.com:digibee-product/core/pipeline-trigger.git
+        dest: "~/Git/digibee/pipeline-trigger"
+      - url: git@gitlab.com:digibee-product/components/default-collection-core.git
+        dest: "~/Git/digibee/default-collection-core"
+      - url: git@gitlab.com:digibee-product/core/pipeline-engine-light.git
+        dest: "~/Git/digibee/pipeline-engine-light"
+      - url: git@gitlab.com:digibee-product/core/pipeline-engine-light-v2.git
+        dest: "~/Git/digibee/pipeline-engine-light-v2"
+      - url: git@gitlab.com:digibee-product/core-platforms/pipeline-controller.git
+        dest: "~/Git/digibee/pipeline-controller"
+      - url: git@gitlab.com:digibee-product/core/digibeectl.git
+        dest: "~/Git/digibee/digibeectl"
+      - url: git@gitlab.com:digibee-product/core/pipeline-coordinator.git
+        dest: "~/Git/digibee/pipeline-coordinator"
+      - url: git@gitlab.com:digibee-product/web/digibee-portal-v3.git
+        dest: "~/Git/digibee/digibee-portal-v3"
+      - url: git@gitlab.com:digibee-product/web/digibee-graphql.git
+        dest: "~/Git/digibee/digibee-graphql"
+      - url: git@gitlab.com:digibee-product/design-system/digibee-ui.git
+        dest: "~/Git/digibee/digibee-ui"
+      - url: git@gitlab.com:digibee-product/design-system/beehive.git
+        dest: "~/Git/digibee/beehive"
+
+  - config: config.morelli
+    repos:
+      - url: "git@github.com:MarcosMorelli/ansible-mac.git"
+        dest: "~/Git/marcosmorelli/ansible-mac"
+      - url: "git@github.com:MarcosMorelli/smart-poker.git"
+        dest: "~/Git/marcosmorelli/smart-poker"
+      - url: "git@github.com:MarcosMorelli/react-fe.git"
+        dest: "~/Git/marcosmorelli/react-fe"
+      - url: "git@github.com:MorelliTec/node-be.git"
+        dest: "~/Git/marcosmorelli/node-be"
+      - url: "git@github.com:MorelliTec/terraform-infra.git"
+        dest: "~/Git/marcosmorelli/terraform-infra"
 
 git_envs:
-  # MarcosMorelli
   - env: "node-be-env"
     dest: "~/Git/marcosmorelli/node-be/.env"
-  # ZARV
-  - env: "zarv-id-env"
-    dest: "~/Git/zarv/zarv-id/.env"
-  - env: "zarv-id-env-local"
-    dest: "~/Git/zarv/zarv-id/.env.local"
-  - env: "ultron-v3-env-local"
-    dest: "~/Git/zarv/ultron-v3/.env.local"

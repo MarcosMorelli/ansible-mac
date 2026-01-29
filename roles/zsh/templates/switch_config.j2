@@ -1,0 +1,11 @@
+CONFIG=config.morelli
+EMAIL=marcos.eduardo.morelli@gmail.com
+
+PWD=$(pwd)
+if [[ $PWD == /Users/{{ ansible_facts['env']['USER'] }}/Git/digibee* ]]; then
+  CONFIG=config.digibee
+  EMAIL=marcos.morelli@digibee.com
+fi
+
+git config user.email $EMAIL
+cp ~/.ssh/$CONFIG ~/.ssh/config

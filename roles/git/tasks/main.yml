@@ -16,18 +16,9 @@
     name: init.defaultBranch
     value: main
 
-- name: Git - Create directories
-  ansible.builtin.file:
-    path: "{{ item.dest }}"
-    state: directory
-  loop: "{{ git_repositories }}"
-
 - name: Git - Clone repositories
-  ansible.builtin.git:
-    repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
+  ansible.builtin.include_tasks: clone_repos.yml
   loop: "{{ git_repositories }}"
-  ignore_errors: yes
 
 - name: Git - Copy envs
   ansible.builtin.copy:

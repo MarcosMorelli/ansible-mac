@@ -2,7 +2,7 @@
 export ZSH="{{ ansible_facts['env']['HOME'] }}/.oh-my-zsh"
 
 # Created by `pipx` on 2025-08-08 02:04:58
-export PATH="$PATH:/Users/morelli/.local/bin"
+export PATH="$PATH:/Users/{{ ansible_facts['env']['USER'] }}/.local/bin"
 
 # NVM config
 export NVM_DIR="$HOME/.nvm"
@@ -135,7 +135,7 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # Git profile switcher by context
-alias git='/Users/morelli/git.sh && git'
+alias git='/Users/{{ ansible_facts['env']['USER'] }}/.ssh/switch_config.sh && git'
 
 # Keys for infra project
 source ~/.keys
