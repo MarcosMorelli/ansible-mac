@@ -1,0 +1,32 @@
+- Name: Java - Install SDKMAN
+  ansible.builtin.command:
+    cmd: curl -s "https://get.sdkman.io" | bash
+    creates: "{{ ansible_facts['env']['HOME'] }}/.sdkman"
+  tags: ["java"]
+
+- Name: Java - Install Java
+  ansible.builtin.shell:
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk install java {{ JAVA_VERSION }}
+  when: JAVA_VERSION is defined
+  tags: ["java"]
+
+- Name: Java - Install Maven
+  ansible.builtin.shell:
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk install maven {{ MAVEN_VERSION }}
+  when: MAVEN_VERSION is defined
+  tags: ["java"]
+
+- Name: Java - Set Java and Maven as default
+  ansible.builtin.shell:
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk default java {{ JAVA_VERSION }} && sdk default maven {{ MAVEN_VERSION }}
+  when: JAVA_VERSION is defined and MAVEN_VERSION is defined
+  tags: ["java"]
+
+- Name: Java - Copy Maven settings.xml
+  ansible.builtin.copy:
+    dest: "{{ ansible_facts['env']['HOME'] }}/.m2/settings.xml"
+    content: |
+      {{ lookup('ansible.builtin.unvault', 'secrets/m2/settings.xml') }}
+    mode: "0644"
+    owner: "{{ ansible_facts['env']['USER'] }}"
+  tags: ["java"]

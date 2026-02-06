@@ -16,6 +16,12 @@
     name: init.defaultBranch
     value: main
 
+- name: Git - auto setup remote
+  community.general.git_config:
+    scope: global
+    name: push.autoSetupRemote
+    value: true
+
 - name: Git - Clone repositories
   ansible.builtin.include_tasks: clone_repos.yml
   loop: "{{ git_repositories }}"

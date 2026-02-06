@@ -17,7 +17,8 @@
     - role: zsh
     - role: ssh
     - role: git
+    - role: java
     - role: configure_macos
     - role: dock
     - role: cursor
-    # - role: node
+    - role: node

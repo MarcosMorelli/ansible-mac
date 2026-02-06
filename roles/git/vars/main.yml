@@ -7,8 +7,6 @@ git_repositories:
         dest: "~/Git/digibee/pipeline-trigger"
       - url: git@gitlab.com:digibee-product/components/default-collection-core.git
         dest: "~/Git/digibee/default-collection-core"
-      - url: git@gitlab.com:digibee-product/core/pipeline-engine-light.git
-        dest: "~/Git/digibee/pipeline-engine-light"
       - url: git@gitlab.com:digibee-product/core/pipeline-engine-light-v2.git
         dest: "~/Git/digibee/pipeline-engine-light-v2"
       - url: git@gitlab.com:digibee-product/core-platforms/pipeline-controller.git
@@ -25,6 +23,8 @@ git_repositories:
         dest: "~/Git/digibee/digibee-ui"
       - url: git@gitlab.com:digibee-product/design-system/beehive.git
         dest: "~/Git/digibee/beehive"
+      - url: git@gitlab.com:digibee-product/cloud-engineering/gitops/burner-us.git
+        dest: "~/Git/digibee/burner-us"
 
   - config: config.morelli
     repos:
