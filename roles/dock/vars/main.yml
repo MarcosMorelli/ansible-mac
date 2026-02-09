@@ -1,4 +1,4 @@
-dockitems_remove:
+dock_remove:
   - Ajustes do Sistema
   - App Store
   - Apps
@@ -31,7 +31,7 @@ dockitems_remove:
   - Telefone
   - TV
 
-dockitems_persist:
+dock_items_persist:
   - name: "Cursor"
     path: "/Applications/Cursor.app"
     pos: 1

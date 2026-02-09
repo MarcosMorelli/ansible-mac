@@ -1,3 +1,4 @@
+---
 - name: SSH - Creates .ssh directory
   ansible.builtin.file:
     path: "~/.ssh"
@@ -10,7 +11,7 @@
     file_type: file
     patterns: "*"
     excludes: "*.pub"
-  register: found_files
+  register: ssh_found_files
 
 - name: SSH - Copy public keys to .ssh directory
   ansible.builtin.copy:
@@ -18,7 +19,7 @@
     content: |
       {{ lookup('ansible.builtin.unvault', 'secrets/ssh/' ~ item.path | ansible.builtin.basename) }}
     mode: "0600"
-  loop: "{{ found_files.files }}"
+  loop: "{{ ssh_found_files.files }}"
   loop_control:
     label: "{{ item.path | ansible.builtin.basename }}"
 
@@ -27,7 +28,7 @@
     paths: "./secrets/ssh"
     file_type: file
     patterns: "*.pub"
-  register: found_files
+  register: ssh_found_files
 
 - name: SSH - Copy public keys to .ssh directory
   ansible.builtin.copy:
@@ -35,7 +36,7 @@
     content: |
       {{ lookup('ansible.builtin.unvault', 'secrets/ssh/' ~ item.path | ansible.builtin.basename) }}
     mode: "0644"
-  loop: "{{ found_files.files }}"
+  loop: "{{ ssh_found_files.files }}"
   loop_control:
     label: "{{ item.path | ansible.builtin.basename }}"
 
@@ -44,13 +45,13 @@
     paths: "roles/ssh/templates"
     file_type: file
     patterns: "*.j2"
-  register: found_files
+  register: ssh_found_files
 
 - name: SSH - Create config files
   ansible.builtin.template:
     src: "{{ item.path | ansible.builtin.basename }}"
     dest: "{{ ansible_facts['env']['HOME'] }}/.ssh/{{ item.path | ansible.builtin.basename | replace('.j2', '') }}"
     owner: "{{ ansible_facts['env']['USER'] }}"
-  loop: "{{ found_files.files }}"
+  loop: "{{ ssh_found_files.files }}"
   loop_control:
     label: "{{ item.path | ansible.builtin.basename | replace('.j2', '') }}"

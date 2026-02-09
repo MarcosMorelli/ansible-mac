@@ -1,3 +1,4 @@
+---
 - name: Git - name
   community.general.git_config:
     scope: global

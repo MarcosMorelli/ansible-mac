@@ -1,15 +1,16 @@
+---
 - name: "Check node version: {{ node_version }}"
   ansible.builtin.shell:
-    cmd: source ~/.zshrc && nvm ls {{node_version}}
+    cmd: source ~/.zshrc && nvm ls {{ node_version }}
   register: node_v_result
   ignore_errors: true
   changed_when: false
 
 - name: "Check if node version is installed"
-  set_fact:
-    version_installed: "{{ node_v_result.rc == 0 and node_version|string in node_v_result.stdout }}"
+  ansible.builtin.set_fact:
+    node_version_installed: "{{ node_v_result.rc == 0 and node_version | string in node_v_result.stdout }}"
 
 - name: "Installing node version: {{ node_version }}"
   ansible.builtin.shell:
-    cmd: source ~/.zshrc && nvm install {{node_version}}
-  when: not version_installed
+    cmd: source ~/.zshrc && nvm install {{ node_version }}
+  when: not node_version_installed

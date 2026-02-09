@@ -1,27 +1,28 @@
-- name: "Check if application {{ item.name }} exists at path {{ item.path }}"
+---
+- name: "Dock - Check if application exists at path {{ item.name | default(item) }}"
   ansible.builtin.stat:
     path: "{{ item.path }}"
-  register: app_exists
+  register: dock_app_exists
   tags: ["dock"]
 
-- name: "See if Dock item {{ item.name | default(item) }} exists."
+- name: "Dock - Check if item exists {{ item.name | default(item) }}"
   ansible.builtin.command: "dockutil --find '{{ item.name }}'"
-  register: dockitem_exists
+  register: dock_item_exists
   failed_when: >
-    "No such file or directory" in dockitem_exists.stdout
-    or "command not found" in dockitem_exists.stdout
+    "No such file or directory" in dock_item_exists.stdout
+    or "command not found" in dock_item_exists.stdout
   changed_when: false
   tags: ["dock"]
 
-- name: Ensure Dock item {{ item.name | default(item) }} exists.
+- name: Dock - Add item {{ item.name | default(item) }}
   ansible.builtin.command: "dockutil --add '{{ item.path }}'"
   when:
-    - app_exists.stat.exists
-    - dockitem_exists.rc > 0
+    - dock_app_exists.stat.exists
+    - dock_item_exists.rc > 0
   tags: ["dock"]
 
-- name: "Skip adding {{ item.name }} - application not found at {{ item.path }}"
+- name: Dock - Debug skipped item
   ansible.builtin.debug:
-    msg: "Skipping {{ item.name }} - application not found at {{ item.path }}"
-  when: not app_exists.stat.exists
+    msg: "Dock - Skipping {{ item.name | default(item) }} - application not found at {{ item.path }}"
+  when: not dock_app_exists.stat.exists
   tags: ["dock"]

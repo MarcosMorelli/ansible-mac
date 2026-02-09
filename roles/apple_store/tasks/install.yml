@@ -1,4 +1,5 @@
-- name: Install {{ item.name }}
+---
+- name: Apple Store - Install {{ item.name }}
   community.general.mas:
     id: "{{ item.id }}"
     state: present

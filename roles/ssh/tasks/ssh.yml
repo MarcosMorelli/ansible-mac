@@ -1,3 +1,4 @@
+---
 - name: SSH - Unvault {{ item.name }}
   ansible.builtin.copy:
     dest: "~/.ssh/{{ item.name }}"

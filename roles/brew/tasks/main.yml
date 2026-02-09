@@ -1,11 +1,12 @@
-- name: Install tap items
+---
+- name: Brew - Install tap items
   ansible.builtin.include_tasks: tap.yml
   loop: "{{ brew_tap }}"
 
-- name: Install brew items
+- name: Brew - Install brew items
   ansible.builtin.include_tasks: brew.yml
   loop: "{{ brew_install }}"
 
-- name: Install cask items
+- name: Brew - Install cask items
   ansible.builtin.include_tasks: cask.yml
   loop: "{{ brew_cask }}"

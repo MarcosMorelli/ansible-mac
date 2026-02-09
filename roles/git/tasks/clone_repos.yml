@@ -1,3 +1,4 @@
+---
 - name: Git - Configure ssh
   ansible.builtin.copy:
     src: "{{ ansible_facts['env']['HOME'] }}/.ssh/{{ item.config }}"
@@ -18,4 +19,4 @@
   loop: "{{ item.repos }}"
   loop_control:
     loop_var: repo
-  ignore_errors: yes
+  ignore_errors: true

@@ -1,3 +1,4 @@
-- name: Reload zshrc
-  ansible.builtin.shell:
+---
+- name: ZSH - Reload zshrc
+  ansible.builtin.command:
     cmd: source ~/.zshrc

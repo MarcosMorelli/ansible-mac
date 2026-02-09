@@ -1,3 +1,4 @@
+---
 - name: Cursor - List installed extensions
   ansible.builtin.shell:
     cmd: |

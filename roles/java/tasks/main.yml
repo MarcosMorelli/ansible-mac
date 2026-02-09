@@ -1,32 +1,48 @@
-- Name: Java - Install SDKMAN
-  ansible.builtin.command:
+---
+- name: Java - Check if SDKMAN is installed
+  ansible.builtin.shell:
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk version
+  register: java_sdkman_version
+  changed_when: false
+  tags: ["java"]
+
+- name: Java - Install SDKMAN
+  ansible.builtin.get_url:
     cmd: curl -s "https://get.sdkman.io" | bash
     creates: "{{ ansible_facts['env']['HOME'] }}/.sdkman"
+  when: not java_sdkman_version.rc == 0
   tags: ["java"]
 
-- Name: Java - Install Java
+- name: Java - Install Java
   ansible.builtin.shell:
-    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk install java {{ JAVA_VERSION }}
-  when: JAVA_VERSION is defined
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk install java {{ java_jdk_version }}
+  when: java_jdk_version is defined and not java_sdkman_version.rc == 0
   tags: ["java"]
 
-- Name: Java - Install Maven
+- name: Java - Install Maven
   ansible.builtin.shell:
-    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk install maven {{ MAVEN_VERSION }}
-  when: MAVEN_VERSION is defined
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk install maven {{ java_mvn_version }}
+  when: java_mvn_version is defined and not java_sdkman_version.rc == 0
   tags: ["java"]
 
-- Name: Java - Set Java and Maven as default
+- name: Java - Set Java default
   ansible.builtin.shell:
-    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk default java {{ JAVA_VERSION }} && sdk default maven {{ MAVEN_VERSION }}
-  when: JAVA_VERSION is defined and MAVEN_VERSION is defined
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk default java {{ java_jdk_version }}
+  when: java_jdk_version is defined and not java_sdkman_version.rc == 0
   tags: ["java"]
 
-- Name: Java - Copy Maven settings.xml
+- name: Java - Set Maven default
+  ansible.builtin.shell:
+    cmd: source "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh" && sdk default maven {{ java_mvn_version }}
+  when: java_mvn_version is defined and not java_sdkman_version.rc == 0
+  tags: ["java"]
+
+- name: Java - Copy Maven settings.xml
   ansible.builtin.copy:
     dest: "{{ ansible_facts['env']['HOME'] }}/.m2/settings.xml"
     content: |
       {{ lookup('ansible.builtin.unvault', 'secrets/m2/settings.xml') }}
     mode: "0644"
     owner: "{{ ansible_facts['env']['USER'] }}"
+  when: not java_sdkman_version.rc == 0
   tags: ["java"]
