@@ -6,6 +6,7 @@ brew_install:
   - alfred
   - cursor
   - dockutil
+  - gh
   - go
   - golang-migrate
   - google-chrome
@@ -24,6 +25,8 @@ brew_install:
   - pnpm
   - postman
   - rectangle
+  - rg
+  - sshpass
   - studio-3t
   - yarn
   - zoom
